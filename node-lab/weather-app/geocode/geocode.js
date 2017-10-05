@@ -15,9 +15,9 @@ var geocodeAddress = (address,callback) => {
 		}if(body.status==='OK') {
 			//console.log(JSON.stringify(body, undefined, 2)); //takes JSON object to String (argument, fill out prop, space use)
 			callback(undefined, {
-				Address: body.results[0].formatted_address,
-				Longitude: body.results[0].geometry.location.lng,
-				Latitude: body.results[0].geometry.location.lat
+				address: body.results[0].formatted_address,
+				longitude: body.results[0].geometry.location.lng,
+				latitude: body.results[0].geometry.location.lat
 			});
 		}		
 	});
