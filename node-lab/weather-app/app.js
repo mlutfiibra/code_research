@@ -1,3 +1,6 @@
+// node app.js -a '1301 lombard street'
+// node app.js -a 08822
+
 const yargs = require('yargs');
 
 const geocode = require('./geocode/geocode');
@@ -17,7 +20,6 @@ const argv = yargs
 	.alias('help', 'h')
 	.argv;
 
-// node app.js -a '1301 lombard street'
 geocode.geocodeAddress(argv.address, (errorMessage, results) => {
 	if(errorMessage) {
 		console.log(errorMessage);
@@ -33,5 +35,3 @@ geocode.geocodeAddress(argv.address, (errorMessage, results) => {
 		});
 	}
 });
-
-// node app.js -a 08822

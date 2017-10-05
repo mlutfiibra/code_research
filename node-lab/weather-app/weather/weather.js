@@ -10,8 +10,6 @@ var getWeather = (latitude, longitude, callback) => {
 			callback(undefined, { 
 				temperature: body.currently.temperature,
 				apparentTemperature: body.currently.apparentTemperature
-				//`Timezone: ${JSON.stringify(body.timezone, undefined, 2)} }` ); //takes JSON object to String (argument, fill out prop, space use)
-				//console.log(body.currently.temperature);
 		});
 		}else {
 			callback(`ERROR: ${error}`);
