@@ -1,0 +1,14 @@
+{
+  "name": "notes-node",
+  "version": "1.0.0",
+  "description": "node is powerfull because it's a open source program that let user maintain/contribute for most problem in node",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "m lutfi",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}
