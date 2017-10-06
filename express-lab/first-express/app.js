@@ -19,6 +19,7 @@ app.get("/", function(req, res) {
 
 //app.get(route_name)
 app.get("/friends", function(req,res) {
+	//RENDER FILES TO WEB SERVER
 	res.render("pages/friends", {friends:friends}); // {view: local}
 });
 

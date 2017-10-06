@@ -2,8 +2,8 @@
 // node app.js -a 08822
 
 const yargs = require('yargs');
-
 const geocode = require('./geocode/geocode');
+
 const WEATHER_JS = require('./weather/weather');
 
 const argv = yargs
