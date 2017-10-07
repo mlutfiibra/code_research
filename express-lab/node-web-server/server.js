@@ -10,7 +10,7 @@ var app = EXPRESS();
 HBS.registerPartials(__dirname  + '/views/partials');
 app.set('view engine', 'hbs'); //hbs,ejs, html
 
-//middleware
+//middleware-next
 app.use((req, res, next) =>{
 	let now = new Date().toString();
 	let log = `${now}: ${req.method} ${req.url}`;
