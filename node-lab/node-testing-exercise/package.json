@@ -1,0 +1,19 @@
+{
+  "name": "testing-exercise",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": " mocha **/*.test.js ",
+    "test-watch": " nodemon --exec \"npm test\" "
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^4.0.1",
+    "supertest": "^3.0.0"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
