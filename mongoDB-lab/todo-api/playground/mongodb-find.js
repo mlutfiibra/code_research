@@ -1,3 +1,5 @@
+//mongod.exe --dbpath /Users/ml/mongo-data
+
 //follow the MongoDB API documentation 
 //const MONGO_CLIENT = require('mongodb').MongoClient;
 const {MongoClient, ObjectID} = require('mongodb');
@@ -9,6 +11,10 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
 	}
 	console.log('Connected to MongoDB server');
 
+	/*
+	**Function for find document in MongoDB
+	**
+	*/
 	// db.collection('Todos').find({
 	// 	_id: new ObjectID('59e21ba054fecf65d4e06b8e')
 	// }).toArray().then((docs) => {
