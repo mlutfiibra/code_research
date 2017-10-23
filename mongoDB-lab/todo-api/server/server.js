@@ -12,11 +12,12 @@ var app = express();
 
 app.use(bodyParser.json());
 
-app.post('/todos',(req,res) => {
+app.post('/todos',( req, res ) => {
 	//create document object
 	var todo = new Todo({
 		text: req.body.text
 	});
+
 	//save to database
 	todo.save().then((doc) => {
 		res.send(doc);
@@ -28,6 +29,8 @@ app.post('/todos',(req,res) => {
 app.listen(3000, () => {
 	console.log('Started on port 3000');
 });
+
+module.exports = {app};
 
 
 // MONGO THINGS
