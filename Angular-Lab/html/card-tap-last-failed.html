@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+<meta charset="utf-8">
+<meta name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, target-densitydpi=medium-dpi"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="format-detection" content="telephone=no">
+<title></title>
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="bg_e-money-incorrect">
+  <div ng-app="myUrl" ng-controller="urlCtrl">
+  	<div class="wrapper">
+      	<span class="OpenSans">
+      		<img src="../img/e-money_orange.png"><b> failed to</b><br>
+      		<b>be detected</b>
+      	</span>	
+    </div>
+    <div class="rectangle-yellow"> 	
+  	</div>
+  	<button class="closeBottom" ng-click="routeTo('pin-entry.html')">
+  	</button>
+      <div class="text-centerNotification" ng-click="routeTo('pin-entry.html')">
+  		<span class="OpenSans">Page close in</span>
+  	</div>
+    <div class="greyCircle" ng-click="routeTo('pin-entry.html')">
+      <div class="countText"><span id="countdowntimer">3</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Javascript -->
+  <script type="text/Javascript" src="../js/page-behaviour.js">
+  </script>
+  <script type="text/javascript">
+      var timeleft=3;
+      var downloadTimer = setInterval(function(){
+      timeleft--;
+      document.getElementById("countdowntimer").textContent = timeleft;
+      if(timeleft==0) {
+        moveTo('card-tap-last.html');
+      } 
+      if(timeleft <= 0)
+          clearInterval(downloadTimer);
+      },1000);
+  </script>
+  <!-- Javascript -->
+
+  <!-- Modules -->
+    <script src="../js/app.js"></script>
+
+  <!-- Controllers -->
+  <script src="../js/controllers/MyController.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,806 @@
+@import url('opensans_regular/stylesheet.css');
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.mandiri-call-page {
+    background-image: url('../img/mandiri-call-page.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+}
+
+.bg_e-money {
+    background: url(../img/page2-bg-01.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+}
+
+.bg_e-money-incorrect {
+    background: url(../img/page3-bg.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+}
+
+.bg_blur-pin {
+    background: url(../img/pin-blur-01.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+}
+
+.imageCreditCardWithBorder {
+    position: absolute;
+    top: 15%;
+    right: .3%;
+
+    width: 100%;
+    max-width: 100%;
+    height: 60vw;
+    max-height: 100%;
+    margin: auto;
+
+    text-align: center;
+
+    background: url(../img/business-card-border-01.png) center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.imageCreditCardWithBorderFailed {
+    position: absolute;
+    top: 15%;
+    right: .3%;
+
+    width: 100%;
+    max-width: 100%;
+    height: 60vw;
+    max-height: 100%;
+    margin: auto;
+
+    text-align: center;
+
+    background: url(../img/business-card-border-rejected-01.png) center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.failedToTap {
+    background: url(../img/pg-3-01.jpg);
+    background-repeat: no-repeat;
+    background-size: 360px 640px;
+}
+
+.alert_wrong-pin {
+    position: absolute;
+    top: 31%;
+
+    width: 100%;
+    max-width: 100%;
+    height: 80vw;
+    max-height: 100%;
+    margin: auto;
+
+    text-align: center;
+
+    opacity: .90;
+    background: url(../img/wrong-pin.png) center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.printReceipt {
+    position: absolute;
+    bottom: 17%;
+
+    width: 100%;
+    max-width: 100%;
+    height: 50vw;
+    max-height: 100%;
+    margin: auto;
+
+    text-align: center;
+
+    background: url(../img/printer-receipt-01.png) center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.thumb {
+    position: absolute;
+    top: 16%;
+    right: 24%;
+
+    width: 50%;
+    max-width: 100%;
+    height: 20vw;
+    max-height: 100%;
+    margin: auto;
+
+    text-align: center;
+
+    background: url(../img/thumbs-up-hand-symbol-01.png) center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#asterisk-container {
+    position: relative;
+}
+
+#asterisk-container img {
+    position: absolute;
+}
+
+.asterisk-dash {
+    position: absolute;
+    top: 24%;
+    right: 12%;
+
+    width: 75%;
+    max-width: 100%;
+    height: 20vw;
+    max-height: 100%;
+    margin: auto;
+
+    text-align: center;
+
+    background: url(../img/asterisk-dash.png) center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.e_money {
+    position: absolute;
+    box-sizing: border-box;
+    top: 12vh;
+    right: 12vw;
+
+    width: 75%;
+    margin: auto;
+
+    padding: 31%;
+    text-align: center;
+
+    opacity: .80;
+    border-radius: 20px;
+    background: url(../img/button-eMoney.png) center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.mandiri {
+    position: absolute;
+    box-sizing: border-box;
+    bottom: 12vh;
+    right: 12vw;
+
+    width: 75%;
+    margin: auto;
+
+    padding: 31%;
+    text-align: center;
+
+    opacity: .80;
+    border-radius: 20px;
+    background: url(../img/button-Mandiri.png) center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, .5);
+}
+
+button.closeBottom {
+    position: absolute;
+    z-index: 1;
+    bottom: 1.2%;
+    left: 13%;
+
+    overflow: hidden;
+
+    width: 6%;
+    height: 6%;
+    padding: 5%;
+
+    white-space: nowrap;
+
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    background: url(../img/button-close.png) center;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 60% 60%;
+}
+
+button.e_money:active {
+    border-collapse: inherit;
+}
+
+button.mandiri:active {
+    border-collapse: inherit;
+}
+
+button.topUp-25k {
+    position: relative;
+
+    box-sizing: border-box;
+    width: 25%;
+    height: 50%;
+    margin-top: 64%;
+    padding: 20%;
+
+    border-radius: 20px;
+    background: url(../img/btn-25k-01.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    box-shadow: 3px 3px 6px 3px rgba(.5, .5, .5, .5);
+}
+
+button.topUp-50k {
+    position: relative;
+
+    box-sizing: border-box;
+    width: 25%;
+    height: 50%;
+    margin: 12px;
+    padding: 20%;
+
+    border-radius: 20px;
+    background: url(../img/btn-50k-01.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    box-shadow: 3px 3px 6px 3px rgba(.5, .5, .5, .5);
+}
+
+button.topUp-100k {
+    position: relative;
+
+    box-sizing: border-box;
+    width: 25%;
+    height: 50%;
+    margin-bottom: 30%;
+    padding: 20%;
+
+    border-radius: 20px;
+    background: url(../img/btn-100k-01.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    box-shadow: 3px 3px 6px 3px rgba(.5, .5, .5, .5);
+}
+
+button.topUp-200k {
+    position: relative;
+
+    box-sizing: border-box;
+    width: 25%;
+    height: 50%;
+    margin: 12px;
+    padding: 20%;
+
+    border-radius: 20px;
+    background: url(../img/btn-200k-01.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    box-shadow: 3px 3px 6px 3px rgba(.5, .5, .5, .5);
+}
+
+span.text-centerPage2 {
+    position: absolute;
+    right: 16%;
+    bottom: 20%;
+
+    text-align: center;
+}
+
+span.text-centerPage3 {
+    position: absolute;
+    right: 26%;
+    bottom: 20%;
+
+    text-align: center;
+}
+
+span.text-centerPageUpdateBalance {
+    position: absolute;
+    bottom: 5%;
+    left: 9%;
+
+    text-align: center;
+}
+
+div.text-centerNotification {
+    position: absolute;
+    bottom: 2.3%;
+
+    width: 100%;
+
+    text-align: center;
+}
+
+div.bottomNotification {
+    position: absolute;
+    right: 2.5%;
+    bottom: 1%;
+
+    text-align: center;
+}
+
+.OpenSans {
+    font-family: 'opensans regular';
+    font-size: 7vw;
+
+    right: 14%;
+
+    max-width: 300px;
+    max-width: 80%;
+
+    color: #1c2d5a;
+
+    align-content: center;
+}
+
+.OpenSans-Small {
+    font-family: 'opensans regular';
+    font-size: 5.7vw;
+
+    right: 14%;
+
+    max-width: 300px;
+    max-width: 80%;
+
+    color: #1c2d5a;
+
+    align-content: center;
+}
+
+.OpenSans-Smaller {
+    font-family: 'opensans regular';
+    font-size: 4.2vw;
+
+    right: 14%;
+
+    max-width: 300px;
+    max-width: 80%;
+
+    color: #1c2d5a;
+
+    align-content: center;
+}
+
+.OpenSans-Big {
+    font-family: 'opensans regular';
+    font-size: 11vw;
+
+    right: 14%;
+
+    max-width: 300px;
+    max-width: 80%;
+
+    color: #1c2d5a;
+
+    align-content: center;
+}
+
+.countText {
+    font-family: 'opensans regular';
+    font-size: 7vw;
+
+    position: absolute;
+    top: 0vw;
+    left: 3vw;
+
+    text-align: center;
+
+    color: black;
+}
+
+.greyCircle {
+    position: absolute;
+    top: 92.5vh;
+    left: 82%;
+
+    width: 0;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    margin: auto;
+    padding: 5%;
+
+    text-align: center;
+
+    background: url(../img/grey-circle-01.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.imageMasterCardMandiri {
+    position: absolute;
+    top: 15%;
+
+    width: 100%;
+    max-width: 100%;
+    height: 48vw;
+    max-height: 100%;
+    margin: auto;
+
+    text-align: center;
+
+    background: url(../img/mandiri_mastercard.png) center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.imageMasterCardMandiriRejected {
+    position: absolute;
+    top: 15%;
+
+    width: 100%;
+    max-width: 100%;
+    height: 48vw;
+    max-height: 100%;
+    margin: auto;
+
+    text-align: center;
+
+    background: url(../img/mandiri_mastercard-rejected.png) center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.imageGoldMasterCardMandiriRejected {
+    position: absolute;
+    top: 15%;
+
+    width: 100%;
+    max-width: 100%;
+    height: 48vw;
+    max-height: 100%;
+    margin: auto;
+
+    text-align: center;
+
+    background: url(../img/ic_account-card_savings-gold-rejected.png) center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#container {
+    position: relative;
+
+    display: table;
+
+    width: 360px;
+    height: 640px;
+
+    text-align: center;
+}
+
+#container.image-container {
+    display: table-cell;
+
+    text-align: center;
+    vertical-align: middle;
+}
+
+#container.image-container img {
+    opacity: .89;
+    background: url('../img/mandiri-call-page.jpg') center;
+    background-repeat: no-repeat;
+    background-size: 360px 640px;
+}
+
+.bigAndBold {
+    font-size: 23pt;
+    font-weight: bolder;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    right: 4%;
+
+    width: 100%;
+
+    text-align: center;
+}
+
+.wrapper {
+    position: absolute;
+    bottom: 33%;
+
+    width: 100%;
+
+    text-align: center;
+}
+
+.wrapper-topUp {
+    position: absolute;
+    top: 26%;
+
+    width: 100%;
+
+    text-align: center;
+}
+
+.wrapper-success {
+    position: absolute;
+    top: 33%;
+
+    width: 100%;
+
+    text-align: center;
+}
+
+.wrapper-balance {
+    position: absolute;
+    top: 4%;
+
+    width: 100%;
+
+    text-align: center;
+}
+
+.wrapper-print {
+    position: absolute;
+    top: 37%;
+
+    width: 100%;
+
+    text-align: center;
+}
+
+.shape {
+    width: 39px;
+    height: 39px;
+
+    background-color: #ea0000;
+}
+
+.page-close-in {
+    font-family: OpenSans;
+    font-size: 24px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+
+    width: 151px;
+    height: 32px;
+
+    text-align: left;
+    letter-spacing: normal;
+
+    color: #0f2b5b;
+
+    -webkit-text-stroke: 1px #979797;
+}
+
+.shape {
+    width: 14px;
+    height: 14px;
+
+    background-color: #000;
+}
+
+.oval {
+    width: 36px;
+    height: 36px;
+
+    background-color: #848484;
+}
+
+.rectangle-yellow {
+    position: absolute;
+    z-index: -1;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 16vw;
+
+    background-color: #f8ce31;
+    background-size: contain;
+}
+
+.logo-e-money {
+    width: 115px;
+    height: 27px;
+
+    background-color: #f16623;
+}
+
+.img-login-logo {
+    position: absolute;
+    top: 0;
+    right: 10%;
+
+    width: 65%;
+    max-width: 100%;
+    height: 52vw;
+    max-height: 100%;
+    margin: auto;
+
+    background: url(../img/img_login_logo.png) center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.img-key {
+    position: absolute;
+    top: 0;
+    right: 17%;
+
+    width: 65%;
+    max-width: 100%;
+    height: 30vw;
+    max-height: 100%;
+    margin: auto;
+
+    background: url(../img/key-01.png) center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.img-key-rejected {
+    position: absolute;
+    top: 0;
+    right: 17%;
+
+    width: 65%;
+    max-width: 100%;
+    height: 30vw;
+    max-height: 100%;
+    margin: auto;
+
+    background: url(../img/key-rejected-01.png) center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.hand-credit-card {
+    position: absolute;
+    top: 31%;
+
+    width: 100%;
+    max-width: 100%;
+    height: 48vw;
+    max-height: 100%;
+    margin: auto;
+
+    text-align: center;
+
+    background: url(../img/hand-credit-card-Rejected-Icon-01.png) center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.e-Money-logo img {
+    width: 20%;
+    height: 20%;
+}
+
+
+/*GRID*/
+
+.square {
+    position: relative;
+    right: 1.8%;
+    bottom: auto;
+
+    float: left;
+
+    width: 33%;
+    margin: 0;
+    padding-bottom: 20%;
+    /* = width for a 1:1 aspect ratio */
+    text-align: center;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    /* you change this to "contain" if you don't want the images to be cropped */
+}
+
+.img_1-1 {
+    background-image: url(../img/btn-1-01.png);
+}
+
+.img_1-2 {
+    background-image: url(../img/btn-2-01.png);
+}
+
+.img_1-3 {
+    background-image: url(../img/btn-3-01.png);
+}
+
+.img_2-1 {
+    background-image: url(../img/btn-4-01.png);
+}
+
+.img_2-2 {
+    background-image: url(../img/btn-5-01.png);
+}
+
+.img_2-3 {
+    background-image: url(../img/btn-6-01.png);
+}
+
+.img_3-1 {
+    background-image: url(../img/btn-7-01.png);
+}
+
+.img_3-2 {
+    background-image: url(../img/btn-8-01.png);
+}
+
+.img_3-3 {
+    background-image: url(../img/btn-9-01.png);
+}
+
+.img_4-1 {
+    background-image: url(../img/btn-Cancel-01.png);
+}
+
+.img_4-2 {
+    background-image: url(../img/btn-0-01.png);
+}
+
+.img_4-3 {
+    background-image: url(../img/btn-Backspace-01.png);
+}
+
+
+/*GRID*/
+
+.modal {
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    top: 0;
+    left: 0;
+
+    display: none;
+    /* Hidden by default */
+    overflow: auto;
+    /* Enable scroll if needed */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    padding-top: 100px;
+    /* Location of the box */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(198, 198, 198, .65);
+    /* Black w/ opacity */
+}
+
+
+/* Modal Content */
+
+.modal-content {
+    position: absolute;
+    top: 23%;
+    left: 12.1%;
+
+    width: 65%;
+    max-width: 100%;
+    height: 65vw;
+    max-height: 100%;
+    margin: auto;
+    padding: 20px;
+
+    background: url(../img/wrong-pin.png) center;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: contain;
+}

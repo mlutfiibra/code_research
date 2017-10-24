@@ -1,0 +1,22 @@
+<div>
+    <a href="#!/debit-card-balance-sufficiency">
+        <div class="imageMasterCardMandiri">
+        </div>
+    </a>
+    <a href="#!/card-tap-last">
+        <div class="wrapper">
+            <span class="OpenSans" ng-click="routeTo('card-tap-last.html')"><b>Please Authenticate</b></span>
+        </div>
+    </a>
+    <div class="rectangle-yellow" ng-click="routeTo('cc-auth-failed.html')">
+    </div>
+    <button class="closeBottom" ng-click="routeTo('cc-auth-failed.html')">
+    </button>
+    <div class="text-centerNotification">
+        <span class="OpenSans" ng-click="routeTo('cc-auth-failed.html')">Starts again in</span>
+    </div>
+    <div class="greyCircle">
+        <div class="countText">{{timeleft}}
+        </div>
+    </div>
+</div>
