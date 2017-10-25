@@ -8,10 +8,12 @@ var {mongoose} = require('./db/mongoose');
 var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
 
+//add express lib as web framework
 var app = express();
 
 app.use(bodyParser.json());
 
+//Add express post request
 app.post('/todos',( req, res ) => {
 	//create document object
 	var todo = new Todo({
@@ -26,33 +28,17 @@ app.post('/todos',( req, res ) => {
 	});
 });
 
+//Add express get request
+app.get('/todos',( req, res ) => {
+	Todo.find().then((todos) => {
+		res.send({todos});
+	}, (e) => {
+		res.status(400).send(e);
+	});
+});
+
 app.listen( 3000, () => {
 	console.log('Started on port 3000');
 } );
 
 module.exports = {app};
-
-// MONGO THINGS
-
-// var newTodo = new Todo({
-// 	text: 'Now',
-// 	completed : false,
-// 	completedAt : 0
-// 	// other props
-// });
-
-// var user = new Users({
-// 	email: 'mlutfiibra@outlook.com'
-// });  
-
-// newTodo.save().then((doc) => {
-// 	console.log('Saved todo', JSON.stringify(doc, undefined, 2));
-// }, (e) => {
-// 	console.log(`Error: ${e}`);
-// });
-
-// user.save().then((doc) => {
-// 	console.log('Saved todo', JSON.stringify(doc, undefined, 2));
-// }, (e) => {
-// 	console.log(`Error: ${e}`);
-// });

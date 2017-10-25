@@ -1,5 +1,3 @@
-//mongod.exe --dbpath /Users/ml/mongo-data
-
 //follow the MongoDB API documentation 
 //const MONGO_CLIENT = require('mongodb').MongoClient;
 const {MongoClient, ObjectID} = require('mongodb');
