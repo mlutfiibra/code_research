@@ -1,0 +1,21 @@
+composer create-project --prefer-dist laravel/laravel cms 5.2.29
+
+Creating Controller:
+php artisan make:controller --resource <name>
+
+php artisan route:list
+
+php artisan make:migration <file_name> --create="table_name"
+
+php artisan migrate
+
+Creating Models:
+php artisan make:model Role -m (with migration)
+
+TINKER COMMAND:
+>>> php artisan tinker
+>>> App\Post::Create('title'=>'PHP post from tinker', 'content'=>'PHP content from tinker');
+>>> App\Post::where('id', 6)->first();
+>>> App\Post::where('title', 'New Title from this object')->first();
+
+Update = find then overwrite data
