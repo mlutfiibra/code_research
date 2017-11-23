@@ -54,4 +54,19 @@ class User extends Authenticatable
     {
         return $this->morphMany('App\Photo', 'imageable'); //user_id by default
     }
+
+    public function getNameAttribute($name)
+    {
+        return ucfirst($name);
+    }
+
+    public function setNameAttribute($name)
+    {
+        $this->attributes['name'] = strtoupper($name);
+    }
+
+    public static function scopeLatest($query)
+    {
+        return $query->orderBy('id', 'asc')->get();
+    }
 }
