@@ -1,39 +1,122 @@
-// babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
-console.log('app.js is running!');
+// JSX
 
-var app = {
-    title: 'Lazy Afternoon',
-    subtitle: 'Need more people to talk'
+console.log('App.js is running');
+
+// Object
+const app = {
+    title: 'Instinct List',
+    subtitle: 'Never afraid of being single fighter',
+    options: []
 }
 
-var template = (
-    <div>
-        <h1 id="someid">{`${app.title}`}</h1> 
-        <p>{`${app.subtitle}`}</p>
-        <ol>
-            <li>Item one</li>
-            <li>Item two</li>
-        </ol>
-    </div>
-);
-
-var user = {
-    name : 'lutfi',
+const user = {
+    name: 'Lutfi',
     age: 23,
     location: 'Jakarta'
-};
-var userName = 'Donald';
-var userAge = 22;
-var userLocation = 'Bandung';
+} ;
 
-var templateTwo = (
+function getLocation(location) {
+    if (location) {
+        return <p>Location: {location}</p>;
+    }
+}
+
+// JSX - Javascript XML
+
+const renderForm = () => {
+    const template = (
+        <div>
+            <h1>{app.title}</h1>
+            {app.subtitle && <p>Subtitle: {app.subtitle}</p>}
+
+            <p>{app.options.length > 0 ? 'Here are ur opt' : 'No options'}</p>
+            
+            <button disabled={app.options.length === 0} onClick={onMakeAction}>What should I do?</button>
+            <ol>
+                {
+                    app.options.map((option, value) => {
+                        return <li key={value}>Options: {option}</li>;
+                    })
+                }
+            </ol>
+
+            <form onSubmit={onFormSubmit}>
+                <input type="text" name="option" />
+                <button>Add option</button>
+            </form>
+
+            <button onClick={resetOptions}>Reset</button>            
+        </div>
+    );
+
+    ReactDOM.render(template, appRoot);    
+};
+
+const templateTwo = (
     <div>
-        <h1>{`${userName} Duck & ${user.name}`}</h1>
-        <p>{`Age: ${userAge}`}</p>
-        <p>{`Location: ${userLocation}`}</p>
+        <h1>{user.name ? user.name : 'Anonymous'}</h1>
+        {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
+        {getLocation(user.location)}
     </div>
 );
 
-var appRoot = document.getElementById('app');
+const renderApp = () => {
+    const templateThree = (
+        <div>
+            <h1>Count: {count}</h1>
+            <button onClick={addOne}>+1</button>
+            <button onClick={minusOne}>-1</button>
+            <button onClick={reset}>reset</button>
+        </div>
+    );
 
-ReactDOM.render(template, appRoot);
+    ReactDOM.render(templateThree, appRoot);
+};
+
+//Functionality
+let count = 0;
+
+const addOne = () => {
+    count++;
+    renderApp();
+}
+
+const minusOne = () => {
+    count--;
+    renderApp();    
+}
+
+const reset = () => {
+    count = 0;
+    renderApp();      
+}
+
+const resetOptions = () => {
+    app.options = [];
+    renderForm();
+}
+
+const onFormSubmit = (e) => { // e=event
+    e.preventDefault();
+
+    const option = e.target.elements.option.value;
+
+    if(option) {
+        app.options.push(option);
+        e.target.elements.option.value = '';
+
+        renderForm();
+    }
+};
+
+const onMakeAction = () => {
+    const randomNum = Math.floor(Math.random() * app.options.length);
+    const option = app.options[randomNum];
+    console.log(randomNum);
+};
+
+const appRoot = document.getElementById('app');
+// renderApp();
+renderForm();
+
+// ReactDOM.render(template, appRoot);
