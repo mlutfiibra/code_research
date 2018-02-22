@@ -1,122 +1,151 @@
-// JSX
+// babel src/app.js --out-file-public/scripts/app.js --presets=env,react --watch
 
-console.log('App.js is running');
+class InstinctApp extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
+        this.handlePick = this.handlePick.bind(this);
+        this.handleAddOption = this.handleAddOption.bind(this);
 
-// Object
-const app = {
-    title: 'Instinct List',
-    subtitle: 'Never afraid of being single fighter',
-    options: []
-}
+        this.state = {
+            options: []
+        };
+    }
 
-const user = {
-    name: 'Lutfi',
-    age: 23,
-    location: 'Jakarta'
-} ;
+    handleDeleteOptions() {
+        this.setState(() => {
+            return {
+                options: []
+            };
+        });
+    }
 
-function getLocation(location) {
-    if (location) {
-        return <p>Location: {location}</p>;
+    handlePick() {
+        const randomNum = Math.floor(Math.random() * this.state.options.length);
+        const option = this.state.options[randomNum];
+        alert(option);
+    }
+
+    handleAddOption(option) {
+        if(!option) {
+            return 'Enter valid value to add item';
+        } else if(this.state.options.indexOf(option) > -1) {
+            return 'This option already exists'
+        } 
+
+        this.setState((prevState) => {
+            return {
+                options: prevState.options.concat(option)
+            };
+        });
+    }
+
+    render() {
+        const title = 'Instinct';
+        const subtitle = 'Never put your life in the hand of computer';
+
+        return (
+            <div>
+                <Header title={title} subtitle={subtitle} />
+                <Action
+                    hasOptions={this.state.options.length > 0}
+                    handlePick={this.handlePick}
+                />
+                <Options
+                    options={this.state.options}
+                    handleDeleteOptions={this.handleDeleteOptions}
+                />
+                <AddOption
+                    handleAddOption={this.handleAddOption}
+                />
+            </div>
+        );
     }
 }
 
-// JSX - Javascript XML
+class Header extends React.Component { //react component = virtual DOM
+    render() { //return jsx
+        return (
+            <div>
+                <h1>{this.props.title}</h1>
+                <h2>{this.props.subtitle}</h2>
+            </div>
+        );
+    }
+}
 
-const renderForm = () => {
-    const template = (
-        <div>
-            <h1>{app.title}</h1>
-            {app.subtitle && <p>Subtitle: {app.subtitle}</p>}
+class Action extends React.Component {
+    render() {
+        return (
+            <div>
+                <button 
+                    onClick={this.props.handlePick}
+                    disabled={!this.props.hasOptions}
+                >
+                    What should I do?
+                </button>
+            </div>
+        );
+    }
+}
 
-            <p>{app.options.length > 0 ? 'Here are ur opt' : 'No options'}</p>
-            
-            <button disabled={app.options.length === 0} onClick={onMakeAction}>What should I do?</button>
-            <ol>
+class Options extends React.Component {
+    render() {
+        return (
+            <div>
+                <button onClick={this.props.handleDeleteOptions}>Remove All</button>
                 {
-                    app.options.map((option, value) => {
-                        return <li key={value}>Options: {option}</li>;
-                    })
+                    this.props.options.map((option) => <Option key={option} optionText={option} />) 
                 }
-            </ol>
-
-            <form onSubmit={onFormSubmit}>
-                <input type="text" name="option" />
-                <button>Add option</button>
-            </form>
-
-            <button onClick={resetOptions}>Reset</button>            
-        </div>
-    );
-
-    ReactDOM.render(template, appRoot);    
-};
-
-const templateTwo = (
-    <div>
-        <h1>{user.name ? user.name : 'Anonymous'}</h1>
-        {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
-        {getLocation(user.location)}
-    </div>
-);
-
-const renderApp = () => {
-    const templateThree = (
-        <div>
-            <h1>Count: {count}</h1>
-            <button onClick={addOne}>+1</button>
-            <button onClick={minusOne}>-1</button>
-            <button onClick={reset}>reset</button>
-        </div>
-    );
-
-    ReactDOM.render(templateThree, appRoot);
-};
-
-//Functionality
-let count = 0;
-
-const addOne = () => {
-    count++;
-    renderApp();
-}
-
-const minusOne = () => {
-    count--;
-    renderApp();    
-}
-
-const reset = () => {
-    count = 0;
-    renderApp();      
-}
-
-const resetOptions = () => {
-    app.options = [];
-    renderForm();
-}
-
-const onFormSubmit = (e) => { // e=event
-    e.preventDefault();
-
-    const option = e.target.elements.option.value;
-
-    if(option) {
-        app.options.push(option);
-        e.target.elements.option.value = '';
-
-        renderForm();
+                {/* {this.props.options.length}                 */}
+            </div>
+        );        
     }
-};
+}
 
-const onMakeAction = () => {
-    const randomNum = Math.floor(Math.random() * app.options.length);
-    const option = app.options[randomNum];
-    console.log(randomNum);
-};
+class Option extends React.Component {
+    render() {
+        return (
+            <div>
+                {this.props.optionText}
+            </div>
+        );
+    }
+}
 
-const appRoot = document.getElementById('app');
-// renderApp();
-renderForm();
+class AddOption extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleAddOption = this.handleAddOption.bind(this);
+        this.state = {
+            error: undefined
+        };
+    }
 
-// ReactDOM.render(template, appRoot);
+    handleAddOption(e) {
+        e.preventDefault(); //the dafault action that belongs to the event will not occur
+
+        const option = e.target.elements.option.value.trim();
+        const error = this.props.handleAddOption(option);        
+
+        this.setState(() => {
+            return {
+                error //error:error
+            };
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                {this.state.error && <p>{this.state.error}</p>}
+                <form onSubmit={this.handleAddOption}>
+                    <input type="text" name="option" />
+                    <button>Submit</button>
+                </form>
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(<InstinctApp />, document.getElementById('app'));
