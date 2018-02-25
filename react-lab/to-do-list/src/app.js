@@ -1,29 +1,73 @@
 // babel src/app.js --out-file-public/scripts/app.js --presets=env,react --watch
 
+// need State? do Class if dont do method
+// Stateless more fast because no lifecycle
+
 class InstinctApp extends React.Component {
     constructor(props) {
         super(props);
         this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
         this.handlePick = this.handlePick.bind(this);
         this.handleAddOption = this.handleAddOption.bind(this);
+        this.handleDeleteOption = this.handleDeleteOption.bind(this);
 
         this.state = {
             options: []
         };
     }
 
+    // ======== LIFECYCLE ======== //
+
+    // Load when Component get mounted (created and inserted) to the DOM
+    componentDidMount() {
+        try {
+            const json = localStorage.getItem('options');
+            const options = JSON.parse(json);
+
+            if (options) {
+                this.setState(() => ({ options }));
+            }
+        }catch(e) {
+
+        }
+        
+    }
+
+    // Load after Component update/change
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.options.length !== this.state.options.length) {
+            const json = JSON.stringify(this.state.options);
+            localStorage.setItem('options', json);
+        }
+    }
+
+    // Load when Component get unmounted to the DOM    
+    componentWillUnmount() {
+        console.log();
+    }
+
     handleDeleteOptions() {
-        this.setState(() => {
-            return {
-                options: []
-            };
-        });
+        this.setState(() => ({ options: [] }));
+
+        // ========== CATATAN ========== //
+        // this.setState(() => {
+        //     return {
+        //         options: []
+        //     };
+        // });
+
+        // const emyptyObj = () => ({}); return empty Object
+    }
+
+    handleDeleteOption(optionToRemove) {
+        this.setState((prevState) => ({
+            options: prevState.options.filter((option) => optionToRemove !== option )
+        }));
     }
 
     handlePick() {
         const randomNum = Math.floor(Math.random() * this.state.options.length);
         const option = this.state.options[randomNum];
-        alert(option);
     }
 
     handleAddOption(option) {
@@ -33,27 +77,32 @@ class InstinctApp extends React.Component {
             return 'This option already exists'
         } 
 
-        this.setState((prevState) => {
-            return {
-                options: prevState.options.concat(option)
-            };
-        });
+        // this.setState((prevState) => {
+        //     return {
+        //         options: prevState.options.concat(option)
+        //     };
+        // });
+
+        this.setState((prevState) => ({ options: prevState.options.concat(option) }));
     }
 
     render() {
-        const title = 'Instinct';
         const subtitle = 'Never put your life in the hand of computer';
 
         return (
             <div>
-                <Header title={title} subtitle={subtitle} />
+                <Header
+                    title={title} 
+                    subtitle={subtitle} 
+                />
                 <Action
-                    hasOptions={this.state.options.length > 0}
                     handlePick={this.handlePick}
+                    hasOptions={this.state.options.length > 0}
                 />
                 <Options
                     options={this.state.options}
                     handleDeleteOptions={this.handleDeleteOptions}
+                    handleDeleteOption={this.handleDeleteOption}
                 />
                 <AddOption
                     handleAddOption={this.handleAddOption}
@@ -63,63 +112,125 @@ class InstinctApp extends React.Component {
     }
 }
 
-class Header extends React.Component { //react component = virtual DOM
-    render() { //return jsx
-        return (
-            <div>
-                <h1>{this.props.title}</h1>
-                <h2>{this.props.subtitle}</h2>
-            </div>
-        );
-    }
+// InstinctApp.defaultProps = {
+//     options: []
+// }
+
+const Header = (props) => {
+    return (
+        <div>
+            <h1>{props.title}</h1>
+            {props.subtitle && <h2>{props.subtitle}</h2>}
+        </div>
+    );
 }
 
-class Action extends React.Component {
-    render() {
-        return (
-            <div>
-                <button 
-                    onClick={this.props.handlePick}
-                    disabled={!this.props.hasOptions}
-                >
-                    What should I do?
+Header.defaultProps = {
+    title: 'Instinct'
+};
+
+// class Header extends React.Component { //react component = virtual DOM
+//     render() { //return jsx
+//         return (
+//             <div>
+//                 <h1>{this.props.title}</h1>
+//                 <h2>{this.props.subtitle}</h2>
+//             </div>
+//         );
+//     }
+// }
+
+const Action = (props) => {
+    return(
+        <div>
+            <button
+                onClick={props.handlePick}
+                disabled={!props.hasOptions}
+            >
+                What should I do?
                 </button>
-            </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
-class Options extends React.Component {
-    render() {
-        return (
-            <div>
-                <button onClick={this.props.handleDeleteOptions}>Remove All</button>
-                {
-                    this.props.options.map((option) => <Option key={option} optionText={option} />) 
-                }
-                {/* {this.props.options.length}                 */}
-            </div>
-        );        
-    }
-}
+// class Action extends React.Component {
+//     render() {
+//         return (
+//             <div>
+//                 <button 
+//                     onClick={this.props.handlePick}
+//                     disabled={!this.props.hasOptions}
+//                 >
+//                     What should I do?
+//                 </button>
+//             </div>
+//         );
+//     }
+// }
 
-class Option extends React.Component {
-    render() {
-        return (
-            <div>
-                {this.props.optionText}
-            </div>
-        );
-    }
-}
+const Options = () => {
+    return (
+        <div>
+            <button onClick={this.props.handleDeleteOptions}>Remove All</button>
+            {props.options.length === 0 && <p>Please add an option to get started!</p>}
+            {
+                this.props.options.map((option) => (
+                    <Option 
+                        key={option}
+                        optionText={option}
+                        handleDeleteOption={props.handleDeleteOption}
+                    />
+                ))
+            }
+            {/* {this.props.options.length}                 */}
+        </div>
+    );
+};
+
+// class Options extends React.Component {
+//     render() {
+//         return (
+//             <div>
+//                 <button onClick={this.props.handleDeleteOptions}>Remove All</button>
+//                 {
+//                     this.props.options.map((option) => <Option key={option} optionText={option} />) 
+//                 }
+//                 {/* {this.props.options.length}                 */}
+//             </div>
+//         );        
+//     }
+// }
+
+const Option = (props) => {
+    return (
+        <div>
+            {props.optionText}
+            <button 
+                onClick={(e) =>{
+                    props.handleDeleteOption(props.optionText);
+                }}
+            >
+                remove
+            </button>
+        </div>
+    );
+};
+
+// class Option extends React.Component {
+//     render() {
+//         return (
+//             <div>
+//                 {this.props.optionText}
+//             </div>
+//         );
+//     }
+// }
 
 class AddOption extends React.Component {
     constructor(props) {
         super(props);
         this.handleAddOption = this.handleAddOption.bind(this);
-        this.state = {
-            error: undefined
-        };
+        this.state(() => ({ error }));
     }
 
     handleAddOption(e) {
@@ -133,6 +244,14 @@ class AddOption extends React.Component {
                 error //error:error
             };
         });
+
+        this.setState(() => {
+            ({ error })
+        });
+
+        if(!error) {
+            e.target.elements.option.value = '';
+        }
     }
 
     render() {
@@ -148,4 +267,15 @@ class AddOption extends React.Component {
     }
 }
 
+// const User = (props) => {
+//     return (
+//         <div>
+//             <p>Name: {props.name}</p>
+//             <p>Age: {props.age}</p>
+//         </div>
+//     );
+// };
+
 ReactDOM.render(<InstinctApp />, document.getElementById('app'));
+
+// ReactDOM.render(<User name='lutfi' age={23} />, document.getElementById('app'));

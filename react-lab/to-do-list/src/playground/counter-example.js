@@ -31,7 +31,7 @@ class Counter extends React.Component {
     handleReset() {
         this.setState(() => {
             render() {
-                count: 0
+                count: 9
             };
         });
 
@@ -40,6 +40,28 @@ class Counter extends React.Component {
         //         count: prevState.count + 1;
         //     };
         // });
+    }
+
+    // ======= LIFECYCLE ======= //
+    componentDidMount() {
+        try {
+            const stringCount = localStorage.getItem('count');
+            const count = parseInt(stringCount, 10);
+
+            if (!isNaN(count)) {
+                this.setState(() => ({ count }));
+            }
+
+        }catch(e) {
+
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.count !== this.state.count) {
+            const json = JSON.stringify(this.state.count);
+            localStorage.setItem('count', json); // key value
+        }
     }
 
     render() {
@@ -53,5 +75,9 @@ class Counter extends React.Component {
         );
     }
 }
+
+// Counter.defaultProps = {
+//     count: 0
+// }
 
 ReactDOM.render(<Counter />, document.getElementById('app'));
