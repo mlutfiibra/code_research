@@ -1,281 +1,59 @@
-// babel src/app.js --out-file-public/scripts/app.js --presets=env,react --watch
+// Local scope
+// import './utils.js';
+// import substract, { square, add } from './utils.js';
+// import isSenior, {isAdult, canDrink} from './person.js';
 
-// need State? do Class if dont do method
-// Stateless more fast because no lifecycle
+// console.log('app.js is running');
+// console.log(square(4));
+// console.log(add(2,1));
+// console.log(substract(15, 6));
+ 
+// console.log(isAdult(20));
+// console.log(canDrink(15));
+// console.log(isSenior(15));
 
-class InstinctApp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-        this.handlePick = this.handlePick.bind(this);
-        this.handleAddOption = this.handleAddOption.bind(this);
-        this.handleDeleteOption = this.handleDeleteOption.bind(this);
+// =========== //
+//  VALIDATOR  //
 
-        this.state = {
-            options: []
-        };
-    }
+// install -> import -> use
+import validator from 'validator';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-    // ======== LIFECYCLE ======== //
+import InstinctApp from './components/InstinctApp';
 
-    // Load when Component get mounted (created and inserted) to the DOM
-    componentDidMount() {
-        try {
-            const json = localStorage.getItem('options');
-            const options = JSON.parse(json);
-
-            if (options) {
-                this.setState(() => ({ options }));
-            }
-        }catch(e) {
-
-        }
-        
-    }
-
-    // Load after Component update/change
-    componentDidUpdate(prevProps, prevState) {
-        if(prevState.options.length !== this.state.options.length) {
-            const json = JSON.stringify(this.state.options);
-            localStorage.setItem('options', json);
-        }
-    }
-
-    // Load when Component get unmounted to the DOM    
-    componentWillUnmount() {
-        console.log();
-    }
-
-    handleDeleteOptions() {
-        this.setState(() => ({ options: [] }));
-
-        // ========== CATATAN ========== //
-        // this.setState(() => {
-        //     return {
-        //         options: []
-        //     };
-        // });
-
-        // const emyptyObj = () => ({}); return empty Object
-    }
-
-    handleDeleteOption(optionToRemove) {
-        this.setState((prevState) => ({
-            options: prevState.options.filter((option) => optionToRemove !== option )
-        }));
-    }
-
-    handlePick() {
-        const randomNum = Math.floor(Math.random() * this.state.options.length);
-        const option = this.state.options[randomNum];
-    }
-
-    handleAddOption(option) {
-        if(!option) {
-            return 'Enter valid value to add item';
-        } else if(this.state.options.indexOf(option) > -1) {
-            return 'This option already exists'
-        } 
-
-        // this.setState((prevState) => {
-        //     return {
-        //         options: prevState.options.concat(option)
-        //     };
-        // });
-
-        this.setState((prevState) => ({ options: prevState.options.concat(option) }));
-    }
-
-    render() {
-        const subtitle = 'Never put your life in the hand of computer';
-
-        return (
-            <div>
-                <Header
-                    title={title} 
-                    subtitle={subtitle} 
-                />
-                <Action
-                    handlePick={this.handlePick}
-                    hasOptions={this.state.options.length > 0}
-                />
-                <Options
-                    options={this.state.options}
-                    handleDeleteOptions={this.handleDeleteOptions}
-                    handleDeleteOption={this.handleDeleteOption}
-                />
-                <AddOption
-                    handleAddOption={this.handleAddOption}
-                />
-            </div>
-        );
-    }
-}
-
-// InstinctApp.defaultProps = {
-//     options: []
-// }
-
-const Header = (props) => {
+const layout = () => {
     return (
         <div>
-            <h1>{props.title}</h1>
-            {props.subtitle && <h2>{props.subtitle}</h2>}
+            <p>Header</p>
+            <p>Footer</p>
         </div>
     );
 }
 
-Header.defaultProps = {
-    title: 'Instinct'
-};
-
-// class Header extends React.Component { //react component = virtual DOM
-//     render() { //return jsx
-//         return (
-//             <div>
-//                 <h1>{this.props.title}</h1>
-//                 <h2>{this.props.subtitle}</h2>
-//             </div>
-//         );
-//     }
-// }
-
-const Action = (props) => {
-    return(
-        <div>
-            <button
-                onClick={props.handlePick}
-                disabled={!props.hasOptions}
-            >
-                What should I do?
-                </button>
-        </div>
-    );
-};
-
-// class Action extends React.Component {
-//     render() {
-//         return (
-//             <div>
-//                 <button 
-//                     onClick={this.props.handlePick}
-//                     disabled={!this.props.hasOptions}
-//                 >
-//                     What should I do?
-//                 </button>
-//             </div>
-//         );
-//     }
-// }
-
-const Options = () => {
-    return (
-        <div>
-            <button onClick={this.props.handleDeleteOptions}>Remove All</button>
-            {props.options.length === 0 && <p>Please add an option to get started!</p>}
-            {
-                this.props.options.map((option) => (
-                    <Option 
-                        key={option}
-                        optionText={option}
-                        handleDeleteOption={props.handleDeleteOption}
-                    />
-                ))
-            }
-            {/* {this.props.options.length}                 */}
-        </div>
-    );
-};
-
-// class Options extends React.Component {
-//     render() {
-//         return (
-//             <div>
-//                 <button onClick={this.props.handleDeleteOptions}>Remove All</button>
-//                 {
-//                     this.props.options.map((option) => <Option key={option} optionText={option} />) 
-//                 }
-//                 {/* {this.props.options.length}                 */}
-//             </div>
-//         );        
-//     }
-// }
-
-const Option = (props) => {
-    return (
-        <div>
-            {props.optionText}
-            <button 
-                onClick={(e) =>{
-                    props.handleDeleteOption(props.optionText);
-                }}
-            >
-                remove
-            </button>
-        </div>
-    );
-};
-
-// class Option extends React.Component {
-//     render() {
-//         return (
-//             <div>
-//                 {this.props.optionText}
-//             </div>
-//         );
-//     }
-// }
-
-class AddOption extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleAddOption = this.handleAddOption.bind(this);
-        this.state(() => ({ error }));
-    }
-
-    handleAddOption(e) {
-        e.preventDefault(); //the dafault action that belongs to the event will not occur
-
-        const option = e.target.elements.option.value.trim();
-        const error = this.props.handleAddOption(option);        
-
-        this.setState(() => {
-            return {
-                error //error:error
-            };
-        });
-
-        this.setState(() => {
-            ({ error })
-        });
-
-        if(!error) {
-            e.target.elements.option.value = '';
-        }
-    }
-
-    render() {
-        return (
-            <div>
-                {this.state.error && <p>{this.state.error}</p>}
-                <form onSubmit={this.handleAddOption}>
-                    <input type="text" name="option" />
-                    <button>Submit</button>
-                </form>
-            </div>
-        );
-    }
-}
-
-// const User = (props) => {
-//     return (
-//         <div>
-//             <p>Name: {props.name}</p>
-//             <p>Age: {props.age}</p>
-//         </div>
-//     );
-// };
+const template = (
+    <div>
+        <h1>Page Title</h1>
+        <p>THis is my page.</p>
+    </div>
+);
 
 ReactDOM.render(<InstinctApp />, document.getElementById('app'));
 
-// ReactDOM.render(<User name='lutfi' age={23} />, document.getElementById('app'));
+class OldSyntax {
+    constructor() {
+        this.name = 'Adem';
+    }
+}
+
+const oldSyntax = new OldSyntax();
+console.log(oldSyntax);
+
+class NewSyntax {
+    name = 'Jude';
+
+    getGreetings= () => `Hi, my name is ${this.name}`;
+}
+
+const newSyntax = new NewSyntax();
+console.log(newSyntax.getGreetings());
