@@ -40,20 +40,20 @@ const template = (
 
 ReactDOM.render(<InstinctApp />, document.getElementById('app'));
 
-class OldSyntax {
-    constructor() {
-        this.name = 'Adem';
-    }
-}
+// class OldSyntax {
+//     constructor() {
+//         this.name = 'Adem';
+//     }
+// }
 
-const oldSyntax = new OldSyntax();
-console.log(oldSyntax);
+// const oldSyntax = new OldSyntax();
+// console.log(oldSyntax);
 
-class NewSyntax {
-    name = 'Jude';
+// class NewSyntax {
+//     name = 'Jude';
 
-    getGreetings= () => `Hi, my name is ${this.name}`;
-}
+//     getGreetings= () => `Hi, my name is ${this.name}`;
+// }
 
-const newSyntax = new NewSyntax();
-console.log(newSyntax.getGreetings());
+// const newSyntax = new NewSyntax();
+// console.log(newSyntax.getGreetings())
