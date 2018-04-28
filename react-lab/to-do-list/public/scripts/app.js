@@ -1,352 +1,89 @@
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _validator = require('validator');
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _validator2 = _interopRequireDefault(_validator);
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+var _react = require('react');
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _react2 = _interopRequireDefault(_react);
 
-// babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
+var _reactDom = require('react-dom');
 
-// need State? do Class if dont do method
-// Stateless more fast because no lifecycle
+var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var InstinctApp = function (_React$Component) {
-    _inherits(InstinctApp, _React$Component);
+var _InstinctApp = require('./components/InstinctApp');
 
-    function InstinctApp(props) {
-        _classCallCheck(this, InstinctApp);
+var _InstinctApp2 = _interopRequireDefault(_InstinctApp);
 
-        var _this = _possibleConstructorReturn(this, (InstinctApp.__proto__ || Object.getPrototypeOf(InstinctApp)).call(this, props));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-        _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);
-        _this.handlePick = _this.handlePick.bind(_this);
-        _this.handleAddOption = _this.handleAddOption.bind(_this);
-        _this.handleDeleteOption = _this.handleDeleteOption.bind(_this);
+// Local scope
+// import './utils.js';
+// import substract, { square, add } from './utils.js';
+// import isSenior, {isAdult, canDrink} from './person.js';
 
-        _this.state = { options: [] };
-        return _this;
-    }
-    // ======== LIFECYCLE ======== //
+// console.log('app.js is running');
+// console.log(square(4));
+// console.log(add(2,1));
+// console.log(substract(15, 6));
 
-    // Load when Component get mounted (created and inserted) to the DOM
+// console.log(isAdult(20));
+// console.log(canDrink(15));
+// console.log(isSenior(15));
 
+// =========== //
+//  VALIDATOR  //
 
-    _createClass(InstinctApp, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            try {
-                var json = localStorage.getItem('options');
-                var options = JSON.parse(json);
-
-                if (options) {
-                    this.setState(function () {
-                        return { options: options };
-                    });
-                }
-            } catch (e) {
-                // Do nothing at all
-            }
-        }
-        // Load after Component update/change
-
-    }, {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate(prevProps, prevState) {
-            if (prevState.options.length !== this.state.options.length) {
-                var json = JSON.stringify(this.state.options);
-                localStorage.setItem('options', json);
-            }
-        }
-        // Load when Component get unmounted to the DOM    
-
-    }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-            console.log('componentWillUnmount');
-        }
-    }, {
-        key: 'handleDeleteOptions',
-        value: function handleDeleteOptions() {
-            this.setState(function () {
-                return { options: [] };
-            });
-
-            // ========== CATATAN ========== //
-            // this.setState(() => {
-            //     return {
-            //         options: []
-            //     };
-            // });
-
-            // const emyptyObj = () => ({}); return empty Object
-        }
-    }, {
-        key: 'handleDeleteOption',
-        value: function handleDeleteOption(optionToRemove) {
-            this.setState(function (prevState) {
-                return {
-                    options: prevState.options.filter(function (option) {
-                        return optionToRemove !== option;
-                    })
-                };
-            });
-        }
-    }, {
-        key: 'handlePick',
-        value: function handlePick() {
-            var randomNum = Math.floor(Math.random() * this.state.options.length);
-            var option = this.state.options[randomNum];
-            alert(option);
-        }
-    }, {
-        key: 'handleAddOption',
-        value: function handleAddOption(option) {
-            if (!option) {
-                return 'Enter valid value to add item';
-            } else if (this.state.options.indexOf(option) > -1) {
-                return 'This option already exists';
-            }
-
-            // this.setState((prevState) => {
-            //     return {
-            //         options: prevState.options.concat(option)
-            //     };
-            // });
-
-            this.setState(function (prevState) {
-                return { options: prevState.options.concat(option) };
-            });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var subtitle = 'Never put your life in the hand of computer';
-
-            return React.createElement(
-                'div',
-                null,
-                React.createElement(Header, { subtitle: subtitle }),
-                React.createElement(Action, {
-                    handlePick: this.handlePick,
-                    hasOptions: this.state.options.length > 0
-                }),
-                React.createElement(Options, {
-                    options: this.state.options,
-                    handleDeleteOptions: this.handleDeleteOptions,
-                    handleDeleteOption: this.handleDeleteOption
-                }),
-                React.createElement(AddOption, {
-                    handleAddOption: this.handleAddOption
-                })
-            );
-        }
-    }]);
-
-    return InstinctApp;
-}(React.Component);
-
-var Header = function Header(props) {
-    return React.createElement(
+// install -> import -> use
+var layout = function layout() {
+    return _react2.default.createElement(
         'div',
         null,
-        React.createElement(
-            'h1',
-            null,
-            props.title
-        ),
-        props.subtitle && React.createElement(
-            'h2',
-            null,
-            props.subtitle
-        )
-    );
-};
-
-Header.defaultProps = {
-    title: 'Instinct'
-};
-
-// class Header extends React.Component { //react component = virtual DOM
-//     render() { //return jsx
-//         return (
-//             <div>
-//                 <h1>{this.props.title}</h1>
-//                 <h2>{this.props.subtitle}</h2>
-//             </div>
-//         );
-//     }
-// }
-
-var Action = function Action(props) {
-    return React.createElement(
-        'div',
-        null,
-        React.createElement(
-            'button',
-            {
-                onClick: props.handlePick,
-                disabled: !props.hasOptions
-            },
-            'What should I do?'
-        )
-    );
-};
-
-// class Action extends React.Component {
-//     render() {
-//         return (
-//             <div>
-//                 <button 
-//                     onClick={this.props.handlePick}
-//                     disabled={!this.props.hasOptions}
-//                 >
-//                     What should I do?
-//                 </button>
-//             </div>
-//         );
-//     }
-// }
-
-var Options = function Options(props) {
-    return React.createElement(
-        'div',
-        null,
-        React.createElement(
-            'button',
-            { onClick: props.handleDeleteOptions },
-            'Remove All'
-        ),
-        props.options.length === 0 && React.createElement(
+        _react2.default.createElement(
             'p',
             null,
-            'Please add an option to get started!'
+            'Header'
         ),
-        props.options.map(function (option) {
-            return React.createElement(Option, {
-                key: option,
-                optionText: option,
-                handleDeleteOption: props.handleDeleteOption
-            });
-        })
-    );
-};
-
-// class Options extends React.Component {
-//     render() {
-//         return (
-//             <div>
-//                 <button onClick={this.props.handleDeleteOptions}>Remove All</button>
-//                 {
-//                     this.props.options.map((option) => <Option key={option} optionText={option} />) 
-//                 }
-//                 {/* {this.props.options.length}                 */}
-//             </div>
-//         );        
-//     }
-// }
-
-var Option = function Option(props) {
-    return React.createElement(
-        'div',
-        null,
-        props.optionText,
-        React.createElement(
-            'button',
-            {
-                onClick: function onClick(e) {
-                    props.handleDeleteOption(props.optionText);
-                }
-            },
-            'remove'
+        _react2.default.createElement(
+            'p',
+            null,
+            'Footer'
         )
     );
 };
 
-// class Option extends React.Component {
-//     render() {
-//         return (
-//             <div>
-//                 {this.props.optionText}
-//             </div>
-//         );
+var template = _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+        'h1',
+        null,
+        'Page Title'
+    ),
+    _react2.default.createElement(
+        'p',
+        null,
+        'THis is my page.'
+    )
+);
+
+_reactDom2.default.render(_react2.default.createElement(_InstinctApp2.default, null), document.getElementById('app'));
+
+// class OldSyntax {
+//     constructor() {
+//         this.name = 'Adem';
 //     }
 // }
 
-var AddOption = function (_React$Component2) {
-    _inherits(AddOption, _React$Component2);
+// const oldSyntax = new OldSyntax();
+// console.log(oldSyntax);
 
-    function AddOption(props) {
-        _classCallCheck(this, AddOption);
+// class NewSyntax {
+//     name = 'Jude';
 
-        var _this2 = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
+//     getGreetings= () => `Hi, my name is ${this.name}`;
+// }
 
-        _this2.handleAddOption = _this2.handleAddOption.bind(_this2);
-        _this2.state = { error: undefined };
-        return _this2;
-    }
-
-    _createClass(AddOption, [{
-        key: 'handleAddOption',
-        value: function handleAddOption(e) {
-            e.preventDefault(); //the dafault action that belongs to the event will not occur
-
-            var option = e.target.elements.option.value.trim();
-            var error = this.props.handleAddOption(option);
-
-            this.setState(function () {
-                return {
-                    error: error //error:error
-                };
-            });
-
-            this.setState(function () {
-                ({ error: error });
-            });
-
-            if (!error) {
-                e.target.elements.option.value = '';
-            }
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return React.createElement(
-                'div',
-                null,
-                this.state.error && React.createElement(
-                    'p',
-                    null,
-                    this.state.error
-                ),
-                React.createElement(
-                    'form',
-                    { onSubmit: this.handleAddOption },
-                    React.createElement('input', { type: 'text', name: 'option' }),
-                    React.createElement(
-                        'button',
-                        null,
-                        'Submit'
-                    )
-                )
-            );
-        }
-    }]);
-
-    return AddOption;
-}(React.Component);
-
-// const User = (props) => {
-//     return (
-//         <div>
-//             <p>Name: {props.name}</p>
-//             <p>Age: {props.age}</p>
-//         </div>
-//     );
-// };
-
-ReactDOM.render(React.createElement(InstinctApp, null), document.getElementById('app'));
-
-// ReactDOM.render(<User name='lutfi' age={23} />, document.getElementById('app'));
+// const newSyntax = new NewSyntax();
+// console.log(newSyntax.getGreetings())
