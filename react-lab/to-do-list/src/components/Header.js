@@ -8,7 +8,7 @@ const Header = (props) => (
 );
 
 Header.defaultProps = {
-    title: 'Instinct'
+    title: 'To Do List With React'
 };
 
 export default Header;

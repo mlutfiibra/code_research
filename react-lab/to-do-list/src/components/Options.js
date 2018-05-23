@@ -1,5 +1,5 @@
 import React from 'react';
-import Option from './Option'
+import Option from './Option';
 
 const Options = (props) => (
     <div>
@@ -16,4 +16,5 @@ const Options = (props) => (
         }
     </div>
 );
+
 export default Options;

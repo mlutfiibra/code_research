@@ -7,7 +7,7 @@ import Options from './Options';
 import OptionModal from './OptionModal';
 
 export default class InstinctApp extends React.Component {
-    state = { 
+    state = {
         options: [],
         selectedOption: undefined
     };
