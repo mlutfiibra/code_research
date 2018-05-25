@@ -1,13 +1,22 @@
-var nameVar = 'Lutfi';
-var nameVar = 'Muhammad';
-console.log(nameVar);
+var nameVar = 'Andrew';
+var nameVar = 'Mike';
+console.log('nameVar', nameVar);
 
-let nameLet = 'David';
-nameLet = 'Cooper';
-console.log(nameLet);
+let nameLet = 'Jen';
+nameLet = 'Julie';
+console.log('nameLet', nameLet);
 
-const nameConst = 'Aseik';
-console.log(nameConst);
+const nameConst = 'Frank';
+console.log('nameConst', nameConst);
 
-//Block scoping
-// Let and Const, let allow you to re-assign yet const dont
+// Block scoping
+
+const fullName = 'Jen Mead';
+let firstName;
+
+if (fullName) {
+  firstName = fullName.split(' ')[0];
+  console.log(firstName);
+}
+
+console.log(firstName);
