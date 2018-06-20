@@ -15,7 +15,8 @@ export default (state = expensesReducerDefaultState, action) => {
                 if (expense.id === action.id) {
                     return {
                         ...expense,
-                        ...action.updates
+                        ...action.updates //object
+                        // change the same key to new values
                     };
                 } else {
                     return expense;
