@@ -257,7 +257,7 @@
         "exenv": "^1.2.0",
         "expand-brackets": "^0.1.5",
         "expand-range": "^1.8.2",
-        "express": "^4.15.3",
+        "express": "^4.16.3",
         "extend": "^3.0.1",
         "extglob": "^0.3.2",
         "extract-text-webpack-plugin": "^3.0.2",
@@ -709,7 +709,9 @@
         "build-babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch",
         "dev": "webpack --mode development --watch",
         "dev-server": "webpack-dev-server",
-        "test": "jest"
+        "test": "jest",
+        "start": "node server/server.js",
+        "heroku-postbuild": "yarn run build:prod"
     },
     "author": "",
     "license": "ISC"
